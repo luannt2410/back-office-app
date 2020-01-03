@@ -1,4 +1,4 @@
-import {Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -11,5 +11,12 @@ export class DefaultLayoutComponent {
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+
+  logout() {
+    console.log("in logout");
+    console.log(localStorage.getItem('currentUser'));
+    localStorage.clear();
+    console.log(localStorage.getItem('currentUser'));
   }
 }

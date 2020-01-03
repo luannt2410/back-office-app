@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './auth/login/login.component';
+import { SessionValidationGuard } from './auth';
 
 export const routes: Routes = [
   // { path: "admin", loadChildren: "./auth/index" },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'default',
     component: DefaultLayoutComponent,
+    canActivate: [SessionValidationGuard],
     data: {
       title: 'Home'
     },

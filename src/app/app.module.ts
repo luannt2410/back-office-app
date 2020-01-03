@@ -35,7 +35,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { AuthProvider } from './auth';
+import { AuthProvider, SessionValidationGuard } from './auth';
 import { HttpServiceGenerator } from './shared';
 import { Http, HttpModule } from '@angular/http';
 
@@ -62,7 +62,7 @@ import { Http, HttpModule } from '@angular/http';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }, AuthProvider, HttpServiceGenerator],
+  }, AuthProvider, HttpServiceGenerator, SessionValidationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

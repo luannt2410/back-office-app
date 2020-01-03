@@ -15,7 +15,7 @@ interface ISession {
 }
 
 interface ILoginReply {
-    session: ISession;
+    token: ISession;
     user: IUser;
 }
 
@@ -32,8 +32,13 @@ export class AuthService {
         return this.authApi.Post<ILoginReply>("login", {}, option)
             .pipe(tap(data => {
                 console.log("data2222", data);
-                localStorage.setItem('currentUser', JSON.stringify({ token: data.session }));
+                localStorage.setItem('currentUser', JSON.stringify({ token: data.token }));
             }));
+    }
+
+    ValidateSession(scope?: string, token?: string) {
+        console.log("current user~~~~", localStorage.getItem('currentUser'));
+        return Object.keys(localStorage.getItem('currentUser')).length === 0;
     }
 
     private authApi = this.httpG.make("/auth");
