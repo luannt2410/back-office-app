@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService, HttpError } from '../shared';
-import ValidationUtil from '../../util/validation';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-login',
@@ -10,7 +9,14 @@ import * as _ from 'lodash';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  ERROR_ENTER_USERNAME =  0;
+  ERROR_ENTER_PASSWORD = 1;
+  ERROR_ENTER_USERNAME_PASSWORD = 2;
+  ERROR_SERVER = 3;
+  ERROR_WRONG_USERNAME_PASSWORD = 4;
+  LOGIN_OK = 5;
 
+  errorLogin: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -38,23 +44,24 @@ export class LoginComponent implements OnInit {
     };
 
     if (_.isEmpty(userInput.username) && !_.isEmpty(userInput.password)) {
-      alert('Xin hãy nhập username');
+      this.errorLogin = this.ERROR_ENTER_USERNAME;
     } else if (_.isEmpty(userInput.password) && !_.isEmpty(userInput.username)) {
-      alert('Xin hãy nhập password');
+      this.errorLogin = this.ERROR_ENTER_PASSWORD;
     } else if (_.isEmpty(userInput.username) && _.isEmpty(userInput.password)) {
-      alert('Xin hãy nhập username và password');
+      this.errorLogin = this.ERROR_ENTER_USERNAME_PASSWORD;
     } else {
       this.authService.Login(data).subscribe((v) => {
         if (v.user.username != null) {
+          this.errorLogin = this.LOGIN_OK;
           this.router.navigateByUrl('default');
         } else {
           this.router.navigateByUrl('');
         }
       }, (e) => {
         if (e.status === 0) {
-          alert('Server bị lỗi');
+          this.errorLogin = this.ERROR_SERVER;
         } else {
-          alert('Bạn đã nhập sai mật khẩu');
+          this.errorLogin = this.ERROR_WRONG_USERNAME_PASSWORD;
         }
       });
     }
