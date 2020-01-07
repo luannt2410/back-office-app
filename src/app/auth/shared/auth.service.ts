@@ -36,6 +36,13 @@ export class AuthService {
             }));
     }
 
+    Register(option: IAuthOption) {
+        return this.authApi.Post('register', {}, option)
+            .pipe(tap(data => {
+                console.log('register', data);
+            }));
+    }
+
     ValidateSession(scope?: string, token?: string) {
         console.log("current user~~~~", localStorage.getItem('currentUser'));
         return Object.keys(localStorage.getItem('currentUser')).length === 0;
