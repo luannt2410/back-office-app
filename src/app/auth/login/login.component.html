@@ -82,7 +82,6 @@
                   <input [(ngModel)]="fullnameRegister" type="text" class="form-control" formControlName="fullname"
                     placeholder="Full name" autocomplete="fullname" required>
                 </div>
-                <
                 <div class="row">
                   <div class="col-12">
                     <p class="message-alert" *ngIf="errorRegister === 7">Password have to 8 characters !</p>
@@ -91,6 +90,7 @@
                     <p class="message-alert" *ngIf="errorRegister === 10">Username already exist !</p>
                     <p class="message-alert" *ngIf="errorRegister === 11">Register successfully !</p>
                     <p class="message-alert" *ngIf="errorRegister === 3">Server error !</p>
+                    <p class="message-alert" *ngIf="errorRegister === 12">Email is not exist !</p>
                   </div>
                 </div>
                 <div class="row">
