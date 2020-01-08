@@ -13,15 +13,15 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input [(ngModel)]="userNameLogin" type="text" class="form-control" maxlength="10" formControlName="username" placeholder="Username"
-                      autocomplete="username" required>
+                    <input [(ngModel)]="userNameLogin" type="text" class="form-control" maxlength="10"
+                      formControlName="username" placeholder="Username" autocomplete="username" required>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input [(ngModel)]="userPasswordLogin" type="password" class="form-control" formControlName="password" placeholder="Password"
-                      autocomplete="current-password" required>
+                    <input [(ngModel)]="userPasswordLogin" type="password" class="form-control"
+                      formControlName="password" placeholder="Password" autocomplete="current-password" required>
                   </div>
                   <div class="row">
                     <div class="col-12">
@@ -51,22 +51,23 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-user"></i></span>
                   </div>
-                  <input [(ngModel)]="userNameRegister"  type="text" class="form-control" maxlength="10" formControlName="username" placeholder="Username"
-                    autocomplete="username" required>
+                  <input [(ngModel)]="userNameRegister" type="text" class="form-control" maxlength="10"
+                    formControlName="username" placeholder="Username" autocomplete="username" required>
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
-                  <input [(ngModel)]="passWordRegister"  type="password" class="form-control" formControlName="password" placeholder="Password"
-                    autocomplete="current-password" required>
+                  <input [(ngModel)]="passWordRegister" type="password" class="form-control" formControlName="password"
+                    placeholder="Password" autocomplete="current-password" required>
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
-                  <input [(ngModel)]="confirmPassWordRegister"  type="password" class="form-control"  formControlName="passwordconfirm"
-                    placeholder="Confirm Password" autocomplete="passwordconfirm" required>
+                  <input [(ngModel)]="confirmPassWordRegister" type="password" class="form-control"
+                    formControlName="passwordconfirm" placeholder="Confirm Password" autocomplete="passwordconfirm"
+                    required>
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
@@ -84,18 +85,47 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
+                    <p class="message-alert" *ngIf="errorRegister === 3">Server error !</p>
                     <p class="message-alert" *ngIf="errorRegister === 7">Password have to 8 characters !</p>
-                    <p class="message-alert" *ngIf="errorRegister === 8">Pleasr enter full infomation !</p>
+                    <p class="message-alert" *ngIf="errorRegister === 8">Please enter full infomation !</p>
                     <p class="message-alert" *ngIf="errorRegister === 9">Password not match !</p>
                     <p class="message-alert" *ngIf="errorRegister === 10">Username already exist !</p>
-                    <p class="message-alert" *ngIf="errorRegister === 11">Register successfully !</p>
-                    <p class="message-alert" *ngIf="errorRegister === 3">Server error !</p>
                     <p class="message-alert" *ngIf="errorRegister === 12">Email is not exist !</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <button type="submit" class="btn btn-primary left-70">Register</button>
+                    <button type="submit" class="btn btn-primary left-70">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card p-4" *ngIf="onShowConfirmRegister">
+              <form [formGroup]="confirmForm" (submit)="confirm()">
+                <h2>Confirm validate code</h2>
+                <div class="input-group mb-4" *ngIf="onShowValidateCode">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                  </div>
+                  <input [(ngModel)]="validateCode" type="text" class="form-control" formControlName="validatecode"
+                    placeholder="Validate code" autocomplete="validateCode" required>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <p class="message-send-email" *ngIf="errorRegister === 13">Code have sent to {{validateCodeEmail}} !
+                    </p>
+                    <p class="message-alert" *ngIf="errorRegister === 14">Validate code is not correct !
+                      {{validateCodeEmail}}</p>
+                    <p class="message-success" *ngIf="errorRegister === 11">Register successfully !</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary left-30">
+                      Confirm Register
+                    </button>
                   </div>
                 </div>
               </form>
@@ -106,8 +136,10 @@
                   <h2>Sign up</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                     labore et dolore magna aliqua.</p>
-                  <button type="button" class="btn btn-primary active mt-3" (click)="showRegister()" *ngIf="btnRegisterShow">Register Now!</button>
-                  <button type="button" class="btn btn-primary active mt-3" (click)="showLogin()" *ngIf="btnLoginShow">Login Now!</button>
+                  <button type="button" class="btn btn-primary active mt-3" (click)="showRegister()"
+                    *ngIf="btnRegisterShow">Register Now!</button>
+                  <button type="button" class="btn btn-primary active mt-3" (click)="showLogin()"
+                    *ngIf="btnLoginShow">Login Now!</button>
                 </div>
               </div>
             </div>

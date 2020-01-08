@@ -10,6 +10,13 @@ interface IAuthOption {
     // auto_login: boolean;
 }
 
+interface Result {
+    username: string,
+    password: string,
+    email: string,
+    fullname: string
+}
+
 interface ISession {
     id?: string;
 }
@@ -36,10 +43,23 @@ export class AuthService {
             }));
     }
 
-    Register(option: IAuthOption) {
-        return this.authApi.Post('register', {}, option)
+    SendEmail(option: IAuthOption) {
+        return this.authApi.Post('sendEmail', {}, option).pipe(tap(data => {
+            console.log('sendEmail', data);
+        }));
+    }
+
+    CheckEmail(res: Result) {
+        return this.authApi.Post('checkemail', {}, res)
             .pipe(tap(data => {
-                console.log('register', data);
+                console.log('checkemail', data);
+            }));
+    }
+
+    GetCodeEmail(option: IAuthOption) {
+        return this.authApi.Post('getCodeEmail', {}, option)
+            .pipe(tap(data => {
+                console.log('getCodeEmail', data);
             }));
     }
 
@@ -47,6 +67,7 @@ export class AuthService {
         console.log("current user~~~~", localStorage.getItem('currentUser'));
         return Object.keys(localStorage.getItem('currentUser')).length === 0;
     }
+
 
     private authApi = this.httpG.make("/auth");
 }
