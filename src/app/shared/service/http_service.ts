@@ -71,8 +71,6 @@ export class HttpApi<T> {
 
     Post<T2>(sub: string, q?: any, o?: any): Observable<T2> {
         const request = this.makeRequest(RequestMethod.Post, sub, q, o);
-        console.log("requst~~~", request);
-
         return this.send(request);
     }
 
