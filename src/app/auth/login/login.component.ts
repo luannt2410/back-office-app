@@ -101,6 +101,8 @@ export class LoginComponent implements OnInit {
       this.errorRegister = this.ERROR_ENTER_INFO;
     } else if (userInput.password.length < 8 || userInput.passwordconfirm.length < 8) {
       this.errorRegister = this.ERROR_PASSWORD_SHORT;
+    } else if (!_.isEqual(userInput.password, userInput.passwordconfirm)) {
+      this.errorRegister = this.ERROR_PASS_NOT_MATCH;
     } else {
 
       const data = {
