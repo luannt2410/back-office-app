@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   ERROR_ENTER_INFO = 8;
   ERROR_PASS_NOT_MATCH = 9;
   ERROR_USER_NAME_EXIST = 10;
+  ERROR_WRONG_EMAIL = 12;
   LOGIN_OK = 5;
   onShowLogin: boolean;
   onShowRegister: boolean;
@@ -104,7 +105,6 @@ export class LoginComponent implements OnInit {
     } else if (!_.isEqual(userInput.password, userInput.passwordconfirm)) {
       this.errorRegister = this.ERROR_PASS_NOT_MATCH;
     } else {
-
       const data = {
         username: userInput.username,
         password: userInput.password,
@@ -115,7 +115,9 @@ export class LoginComponent implements OnInit {
       this.authService.Register(data).subscribe((response: any) => {
         if (response.msg === 0) {
           this.errorRegister = this.ERROR_USER_NAME_EXIST;
-        } else {
+        } else if (response.msg === 2) {
+          this.errorRegister = this.ERROR_WRONG_EMAIL;
+        } else if (response.msg === 1) {
           this.userNameRegister = '';
           this.passWordRegister = '';
           this.confirmPassWordRegister = '';
