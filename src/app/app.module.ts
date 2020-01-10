@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { AgGridModule } from 'ag-grid-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -38,7 +39,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AuthProvider, SessionValidationGuard } from './auth';
 import { HttpServiceGenerator } from './shared';
 import { Http, HttpModule } from '@angular/http';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     BrowserModule,
@@ -53,6 +54,8 @@ import { Http, HttpModule } from '@angular/http';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
+    AgGridModule.withComponents([]),
+    HttpClientModule,
     HttpModule
   ],
   declarations: [
